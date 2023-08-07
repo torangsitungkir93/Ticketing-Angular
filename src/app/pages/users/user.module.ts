@@ -7,7 +7,6 @@ import { UserRouting } from "./user.routing";
         UserRouting
     ]
 })
-
 export class UserModule{
-
+    
 }

@@ -1,0 +1,96 @@
+<div class="card grid flex justify-content-center align-items-center">
+  <div class="card-container col-6 shadow-8 m-4 surface-card border-round-sm border-400 p-3 ">
+    <div class="grid">
+      <div class="card md:col-6" style="border-radius: 1rem;">
+        <!-- <pre>{{ userResDto | json }}</pre> -->
+        <div class="row">
+          <div class="col-md-12 text-center text-white"
+            style="border-top-left-radius: 1rem; border-bottom-left-radius: 1rem; background-color: cadetblue">
+            <img src="http://localhost:8080/files/{{ userResDto?.photoId }}" alt="Avatar" class="img-thumbnail m-5"
+              style="width: 17rem;" />
+            </div>
+        </div>
+      </div>
+      <div class="md:col-6">
+        <div class="card-body">
+          <div class="flex justify-content-between">
+            <h2>Information</h2>
+            <button type="button" pButton label="Change Photo" class="p-button-success" (click)="showChangePhotoModal()"></button>
+          </div>
+          <hr>
+          <div class="grid">
+
+            <div class="col-6">
+              <div class="grid">
+                <div class="col-4">
+                  <h3>Email</h3>
+                </div>
+                <div class="col-8">
+                  <p>{{ userResDto?.email }}</p>
+                </div>
+              </div>
+              <div class="grid">
+                <div class="col-4">
+                  <h3>Phone</h3>
+                </div>
+                <div class="col-8">
+                  <p class="text-muted">{{ userResDto?.phone }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="grid">
+                <div class="col-4">
+                  <h3>FullName</h3>
+                </div>
+                <div class="col-8">
+                  <p class="text-muted">{{ userResDto?.profileName }}</p>
+                </div>
+                <div class="grid">
+                </div>
+                <div class="col-4">
+                  <h3>Role</h3>
+                </div>
+                <div class="col-8">
+                  <p class="text-muted">{{ userResDto?.roleName }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="grid">
+              <div class="col-8">
+                <h3>Company Name</h3>
+                <p class="text-muted">{{ userResDto?.companyName }}</p>
+              </div>
+            </div>
+            <div class="grid">
+              <div class="col-8">
+                <h3>Alamat</h3>
+                <p class="text-muted">{{ userResDto?.address }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Modal -->
+  <p-dialog header="New Photo Profil" [(visible)]="displayChangePhotoModal" [modal]="true" [resizable]="false" [closable]="true" >
+    <div class="modal-body">
+      <div class="mb-3 grid">
+        <div class="col-6">
+          <label for="formFileSm" class="form-label">Add New Photo Profil</label>
+        </div>
+        <div class="col-6">
+          <p-fileUpload mode="basic" class="col-12" chooseLabel="Upload" accept="image/*" (onSelect)="fileUpload($event)">
+          </p-fileUpload>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer flex justify-content-end">
+      <div class="grid justify-content-end">
+        <button type="button" pButton label="Save changes" class="p-button-primary col-12" (click)="changePhoto()"></button>
+      </div>
+    </div>
+  </p-dialog>

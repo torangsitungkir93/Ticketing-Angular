@@ -1,0 +1,151 @@
+<form [formGroup]="ticketInsertReqDto" (ngSubmit)="insert()">
+  <pre>{{ ticketInsertReqDto.value|json }}</pre>
+  <div class="container">
+    <div class="card-container w-screen flex flex-wrap justify-content-center align-items-center"
+      style="min-height: 700px">
+      <div class="grid shadow-8 m-4 surface-card border-round-sm border-400 p-3 md:col-8 text">
+        <div class="flex text-center justify-content-center col-12">
+          <h2 class="text-center">Tambah Data Ticket</h2>
+        </div>
+
+        <div class="col-12 grid mb-3">
+          <label for="inputName" class="form-label col-12 md:col-3">Nama Customer<span style="color: red;">*</span></label>
+          <input pInputText class="form-control text-muted  col-12 md:col-9" type="text" [value]="fullName" disabled>
+        </div>
+        <div class="col-12 form-group grid">
+          <div class="col-md-6">
+            <label for="validationCustom04" class="form-label  col-12 md:col-3">Priority<span style="color: red;">*</span></label>
+            <p-dropdown formControlName="priorityId" [options]="priority" optionLabel="priorityName"
+              placeholder="select" optionValue="id"></p-dropdown>
+          </div>
+          <div class="col-md-6">
+            <label for="validationCustom04" class="form-label">
+              Subscribed Products<span style="color: red;">*</span> </label>
+            <p-dropdown formControlName="productId" [options]="subscribedProduct" optionLabel="productName"
+              placeholder="select" optionValue="id"></p-dropdown>
+          </div>
+        </div>
+        <div class="col-12 grid mb-3">
+          <label for="inputName" class="form-label col-12 md:col-3">Ticket title<span style="color: red;">*</span></label>
+          <input pInputText type="text" class="form-control  col-12 md:col-9" id="inputName" aria-describedby="inputName"
+            formControlName="ticketTitle">
+        </div>
+        <div class="col-12 grid mb-3">
+          <label for="inputName" class="form-label  col-12 md:col-3">Ticket Body<span style="color: red;">*</span></label>
+          <textarea pInputTextarea class="form-control  col-12 md:col-9" id="exampleFormControlTextarea1" rows="3"
+            formControlName="ticketBody"></textarea>
+        </div>
+        <div class="col-12 grid mb-3">
+          <label for="formFileMultiple" class="form-label  col-12 md:col-3">Input File<span style="color: red;">*</span></label>
+          <p-fileUpload name="fileList[]" [multiple]="true" [showUploadButton]="false" (onSelect)="fileUpload($event)" class=" col-12 md:col-9">
+          </p-fileUpload>
+        </div>
+        <div class="d-flex justify-content-end mt-2">
+          <button type="submit" pButton pRipple type="submit" class="btn btn-primary ">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
+<!-- 
+
+
+<form [formGroup]="ticketInsertReqDto" (ngSubmit)="insert()">
+  <pre>{{ ticketInsertReqDto.value|json }}</pre>
+  <div class="mb-3">
+    <label for="inputName" class="form-label">Nama Customer<span class="text-danger">*</span></label>
+    <input pInputText class="form-control text-muted" type="text" [value]="fullName" disabled>
+  </div>
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label for="validationCustom04" class="form-label">Priority<span class="text-danger">*</span></label>
+      <p-dropdown formControlName="priorityId" [options]="priority" optionLabel="priorityName" placeholder="select"
+        optionValue="id"></p-dropdown>
+    </div>
+    <div class="col-md-6">
+      <label for="validationCustom04" class="form-label">
+        Subscribed Products<span class="text-danger">*</span> </label>
+      <p-dropdown formControlName="productId" [options]="subscribedProduct" optionLabel="productName"
+        placeholder="select" optionValue="id"></p-dropdown>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="inputName" class="form-label">Ticket title<span class="text-danger">*</span></label>
+    <input pInputText type="text" class="form-control" id="inputName" aria-describedby="inputName"
+      formControlName="ticketTitle">
+  </div>
+  <div class="mb-3">
+    <label for="inputName" class="form-label">Ticket Body<span class="text-danger">*</span></label>
+    <textarea pInputTextarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+      formControlName="ticketBody"></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="formFileMultiple" class="form-label">Input File<span class="text-danger">*</span></label>
+    <p-fileUpload name="fileList[]" [multiple]="true" [showUploadButton]="false" (onSelect)="fileUpload($event)">
+    </p-fileUpload>
+  </div>
+  <div class="d-flex justify-content-end mt-2">
+    <button pButton pRipple type="submit" class="btn btn-primary ">Submit</button>
+  </div>
+</form>
+
+
+
+
+<div class="container">
+  <div class="row row d-flex justify-content-center align-items-center min-vh-90 mt-3">
+    <h2 class="text-center">Tambah Ticket</h2>
+    <div class="row border p-3 shadow-lg col-md-8 mt-3">
+      <form action="" [formGroup]="ticketInsertReqDto" (ngSubmit)="insert()">
+        <div class="mb-3">
+          <label for="inputName" class="form-label">Nama Customer<span class="text-danger">*</span></label>
+          <input class="form-control text-muted" type="text" value="{{ fullName }}" aria-label="readonly input example"
+            readonly>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <label for="validationCustom04" class="form-label">Priority<span class="text-danger">*</span></label>
+            <select class="form-select" id="validationCustom04" required formControlName="priorityId">
+              <option selected disabled value="">Choose Priority</option>
+              <option *ngFor="let p of priority" [value]="p.id">{{ p.priorityName }}</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid state.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="validationCustom04" class="form-label">
+              Subscribed Products<span class="text-danger">*</span> </label>
+            <select class="form-select" id="validationCustom04" required formControlName="productId">
+              <option selected disabled value="">Choose Product</option>
+              <option *ngFor="let sb of subscribedProduct" [value]="sb.id">{{ sb.productName}}</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid state.
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="inputName" class="form-label">Ticket title<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="inputName" aria-describedby="inputName"
+            formControlName="ticketTitle">
+        </div>
+        <div class="mb-3">
+          <label for="inputName" class="form-label">Ticket Body<span class="text-danger">*</span></label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+            formControlName="ticketBody"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="formFileMultiple" class="form-label">Input File<span class="text-danger">*</span></label>
+          <input class="form-control" type="file" id="formFileMultiple" multiple (change)="fileUpload($event)">
+        </div>
+        <div class="d-flex justify-content-end mt-2">
+          <button type="submit" class="btn btn-primary ">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->

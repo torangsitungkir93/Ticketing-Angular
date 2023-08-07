@@ -1,0 +1,62 @@
+<form [formGroup]="productUpdateReqDto" (ngSubmit)="submit()">
+  <pre>{{ productUpdateReqDto.value|json }}</pre>
+  <div class="container">
+    <div class="card-container w-screen flex flex-wrap justify-content-center align-items-center"
+      style="min-height: 700px">
+      <div class="grid shadow-8 m-4 surface-card border-round-sm border-400 p-3 md:col-6 text">
+        <div class="flex text-center justify-content-center col-12">
+          <h2 class="text-center">Update Data Product</h2>
+        </div>
+
+        <div class="col-12 md:col-3">
+          <label for="inputCode" class="form-label"> Product Code <span style="color: red;">*</span></label>
+        </div>
+        <div class="col-12 md:col-9">
+          <input pInputText type="text" class="form-control col-12" id="inputCode" aria-describedby="inputName" required [value]="productDataResDto.productCode" disabled>
+        </div>
+        <div class="col-12 md:col-9 col-offset-3">
+          <small id="companyCodeHelp" class="form-text">Company code should be 5 characters long.</small>
+        </div>
+        <div class="col-12 md:col-3">
+          <label for="inputName" class="form-label">Product Name<span style="color: red;">*</span></label>
+        </div>
+        <div class="col-12 md:col-9">
+          <input pInputText type="text" class="form-control col-12 " id="inputName" aria-describedby="inputName" required formControlName="productName">
+        </div>
+          <div class="flex flex-wrap justify-content-end mt-2 col-12">
+            <button type="button" routerLink="/products" pButton pRipple class="p-button-secondary mr-3"
+              icon="pi pi-angle-double-left">. Back to previous menu</button>
+            <button type="submit" pButton pRipple class="p-button-primary"
+              [disabled]="productUpdateReqDto.invalid">Submit</button>
+          </div>
+        </div>
+        </div>
+    </div>
+</form>
+
+
+
+<div class="container mt-3 ">
+  <div class="row d-flex justify-content-center align-items-center min-vh-90">
+    <h2 class="text-center col-6">Edit Data Product</h2>
+    <div class="row border p-3 shadow-lg col-md-8 mt-3">
+      <form [formGroup]="productUpdateReqDto" (ngSubmit)="submit()">
+        <div class="mb-3">
+          <label for="inputName" class="form-label"> Product Code<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="inputName" aria-describedby="inputName" value="{{ productDataResDto.productCode}}" disabled
+            required>
+        </div>
+        <div class="mb-3">
+          <label for="inputName" class="form-label">Product Name<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="inputName" aria-describedby="inputName" required value="{{ productDataResDto.productName}}">
+        </div>
+        <div class="d-flex justify-content-end mt-2">
+          <a type="button" class="btn btn-secondary col-2 me-2" routerLink="/products">
+            Back
+          </a>
+          <button type="submit" class="btn btn-primary ">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

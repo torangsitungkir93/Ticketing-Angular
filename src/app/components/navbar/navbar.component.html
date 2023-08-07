@@ -1,0 +1,10 @@
+
+<div class="card">
+  <p-menubar [model]="items" >
+      <ng-template pTemplate="start">
+      </ng-template>
+      <ng-template pTemplate="end">
+        <img [src]="imgUrl | url"  height="40" class="bg-center w-3rem h-3rem border-round" />
+      </ng-template>
+  </p-menubar>
+</div>

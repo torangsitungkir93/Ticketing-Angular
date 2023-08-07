@@ -1,0 +1,57 @@
+
+
+
+
+<div class="container table-responsive">
+  <h3 class="text-center mt-3">Table List Ticket</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Ticket Code </th>
+        <th scope="col">Customer Name</th>
+        <th scope="col">Ticket Title</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of tickets; let i=index">
+        <th scope="row">{{ i+1 }}</th>
+        <td>{{ t.ticketCode }}</td>
+        <td>{{ t.customerName }}</td>
+        <td>{{ t.title }}</td>
+        <td>{{ t.priority}}</td>
+        <td><span class="badge bg-primary">{{ t.status}}</span></td>
+        <td>
+          <a routerLink="/tickets/detail/{{ t.id }}" class="btn btn-success">View Ticket</a>
+          <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#changeStatusModal">Change
+            Status</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="changeStatusModal" tabindex="-1" aria-labelledby="changeStatusModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="changeStatusModalLabel">Change Status</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <span>
+          Apakah anda yakin ingin mengubah status ticket ini ?
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,174 +1,36 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
-  <div class="container">
-    <a class="navbar-brand" href="home.html">TS-Ticketing</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="home.html">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            List User
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
-        </li>
-      </ul>
-      <div class="dropdown">
-        <div class="btn-group">
-          <i class="bi-person-circle ms-2" style="font-size: 2rem; color: white;" data-bs-toggle="dropdown"></i>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="#">Change Password</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="../">Logout</a></li>
-          </ul>
-        </div>
-      </div>
+
+<div class="container w-screen flex flex-wrap justify-content-center align-items-center">
+  <div class="col-9 flex justify-content-end mt-2">
+      <button routerLink="new" pButton pRipple class="p-button-primary">
+        Add
+      </button>
+  </div>
+  <div class="card col-9 align-items-center">
+    <div class="text-center">
+      <h2>Table User List</h2>
     </div>
-  </div>
-</nav>
-
-<div class="container table-responsive">
-  <div class="d-flex justify-content-center mt-3">
-    <h2>User List</h2>
-  </div>
-  <div class="d-flex justify-content-end mt-2">
-    <a href="add-user.html"> <button type="button" class="btn btn-primary">
-        <i class="bi bi-plus-square"></i> Add Data
-      </button></a>
-  </div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">No</th>
-        <th scope="col">FullName</th>
-        <th scope="col">RoleName</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Khalil Attala</td>
-        <td>Super Admin</td>
-        <td>
-          <a href="profile.html" class="btn btn-secondary">
-            Edit
-          </a>
-          <a href="profile.html" class="btn btn-secondary">
-            View Details
-          </a>
-          <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-            Delete
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Julian Wicaksono</td>
-        <td>Customer</td>
-        <td>
-          <a href="profile.html" class="btn btn-secondary">
-            Edit
-          </a>
-          <a href="profile.html" class="btn btn-secondary">
-            View Details
-          </a>
-          <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-            Delete
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Yuli Fauziah</td>
-        <td>PIC</td>
-        <td>
-          <a href="profile.html" class="btn btn-secondary">
-            Edit
-          </a>
-          <a href="profile.html" class="btn btn-secondary">
-            View Details
-          </a>
-          <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-            Delete
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">4</th>
-        <td>Virgoun</td>
-        <td>Customer</td>
-        <td>
-          <a href="profile.html" class="btn btn-secondary">
-            Edit
-          </a>
-          <a href="profile.html" class="btn btn-secondary">
-            View Details
-          </a>
-          <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-            Delete
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">5</th>
-        <td>Noah </td>
-        <td>Developer</td>
-        <td>
-          <a href="profile.html" class="btn btn-secondary">
-            Edit
-          </a>
-          <a href="profile.html" class="btn btn-secondary">
-            View Details
-          </a>
-          <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-            Delete
-          </a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="changeStatusModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="changeStatusModalLabel">Delete Modal</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <span>
-          Apakah anda yakin ingin menghapus data ini ?
-        </span>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
+    <p-table [value]="users" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="header">
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">FullName</th>
+            <th scope="col">RoleName</th>
+            <th scope="col">Action</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-u let-i="rowIndex">
+          <tr>
+              <td>{{ i+1 }}</td>
+              <td>{{ u.profileName }}</td>
+              <td>{{ u.roleName  }}</td>
+              <td>
+                <div class="p-buttonset">
+                  <button routerLink="/users/detail/{{ u.id }}" pButton pRipple class="p-button-primary" label="View Details"></button>
+                  <button routerLink="/users" pButton pRipple class="p-button-danger" label="Delete"></button>
+                </div>
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
   </div>
 </div>

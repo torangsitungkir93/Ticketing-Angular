@@ -1,0 +1,29 @@
+
+
+<form [formGroup]="loginReqDto" (ngSubmit)="onLogin()">
+  <div class="container">
+    <div class="card-container w-screen flex flex-wrap justify-content-center align-items-center" style="min-height: 700px">
+      <div class="grid shadow-8 m-4 surface-card border-round-sm border-400 p-3 m:col-8 text">
+        <div class=" col-12 justify-content-center text-center">
+          <h2 >Login Page</h2>
+        </div>
+        <div class="col-12">
+          <label for="exampleFormControlInput1" class="form-label">Email address</label>
+        </div>
+        <div class="col-12">
+          <input pInputText type="email" class="form-control col-12" id="exampleFormControlInput1" formControlName="email" required>
+        </div>
+        <div class="col-12">
+          <label for="inputPassword6" class="col-form-label">Password</label>
+        </div>
+        <div class="col-12">
+          <input pInputText type="password" id="inputPassword6" class="form-control col-12" formControlName="password" required>
+        </div>
+        <div class="col-12 gy-3">
+          <button pButton pRipple label="Login" class="col-12 p-button-primary" [loading]="loading" [disabled]="loginReqDto.invalid">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

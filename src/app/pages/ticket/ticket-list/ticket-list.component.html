@@ -1,0 +1,108 @@
+<div class="card col-9">
+  <h2 class="text-center">Table List Ticket</h2>
+  <div *ngIf="isCustomer" class="d-flex justify-content-end mt-3">
+    <p-button *ngIf="isCustomer" routerLink="/tickets/new" styleClass="p-button-primary ml-2"
+              label="Add Data">
+    </p-button>
+  </div>
+  <div class="grid justify-content-center">
+  <p-table [value]="tickets" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Ticket Code </th>
+        <th *ngIf="isDeveloper" scope="col">Customer Name </th>
+        <th scope="col">Ticket Title</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-t let-i="rowIndex">
+      <tr>
+        <th scope="row">{{ i+1 }}</th>
+        <td>{{ t.ticketCode }}</td>
+        <td *ngIf="isDeveloper">{{ t.customerName }}</td>
+        <td>{{ t.title }}</td>
+        <td>{{ t.priority}}</td>
+        <td><p-tag severity="{{ statusColor(t.statusCode) }}" value="{{ t.status }}"></p-tag></td>
+        <td>
+          <div class="btn-gorup d-flex justify-content-center">
+            <p-button routerLink="/tickets/detail/{{ t.id }}" styleClass="p-button-secondary" type="button">View Ticket</p-button>
+            <p-button *ngIf="isCustomer" (click)="detail(t.id)" icon="pi pi-external-link" class="p-button-primary ml-2"
+              label="Change Status">
+            </p-button>
+            <p-button *ngIf="isDeveloper" (click)="detail(t.id)" icon="pi pi-external-link" class="p-button-primary ml-2"
+              label="Change Status">
+            </p-button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+</div>
+
+<!-- 
+
+<div class="container table-responsive">
+  <h3 class="text-center mt-3">Table List Ticket</h3>
+  <div *ngIf="isCustomer" class="d-flex justify-content-end mt-3">
+    <a routerLink="/tickets/new">
+      <button type="button" class="btn btn-primary">
+        <i class="bi bi-plus-square"></i> Add Data
+      </button>
+    </a>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Ticket Code </th>
+        <th *ngIf="isDeveloper" scope="col">Customer Name </th>
+        <th scope="col">Ticket Title</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+
+    <tbody class="table-group-divider">
+      <tr *ngFor="let t of tickets; let i=index">
+        <th scope="row">{{ i+1 }}</th>
+        <td>{{ t.ticketCode }}</td>
+        <td *ngIf="isDeveloper">{{ t.customerName }}</td>
+        <td>{{ t.title }}</td>
+        <td>{{ t.priority}}</td>
+        <td><span class="badge bg-danger">{{ t.status }}</span></td>
+        <td>
+          <div class="btn-gorup d-flex justify-content-center">
+            <a routerLink="/tickets/detail/{{ t.id }}" class="btn btn-success" type="button">View Ticket</a>
+            <p-button *ngIf="isCustomer" (click)="detail(t.id)" icon="pi pi-external-link" class="btn btn-primary"
+              label="Change Status">
+            </p-button>
+            <p-button *ngIf="isDeveloper" (click)="detail(t.id)" icon="pi pi-external-link" class="btn btn-primary"
+              label="Change Status">
+            </p-button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->
+
+<!-- Modal -->
+<p-dialog header="Change Status" [(visible)]="visible" [style]="{ width: '50vw' }">
+  <pre>Ticket : {{ changeStatusReqDto.value|json }}</pre>
+  <pre>RoleCode : {{ roleCode }}</pre>
+  <form [formGroup]="changeStatusReqDto" (ngSubmit)="changeStatus()">
+    <p>
+      Are you sure to change status this ticket ?
+    </p>
+    <div class="flex py-2 justify-content-end">
+      <p-button icon="pi pi-check" type="submit" label="Change Status" styleClass="p-button-primary justify-content-end">
+      </p-button>
+    </div>
+  </form>
+</p-dialog>

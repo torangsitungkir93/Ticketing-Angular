@@ -1,0 +1,201 @@
+<pre class="col-12">{{ commentReqDto.value|json }}</pre>
+<div class="container">
+  <div class="card-container w-screen flex flex-wrap justify-content-center align-items-center"
+    style="min-height: 700px">
+    <div class="grid shadow-8 m-4 surface-card border-round-sm border-400 p-3 md:col-9 text">
+      <div class="flex text-center justify-content-between col-12">
+        <h3>Ticket {{ ticketDataResDto?.title }} #{{ ticketDataResDto?.ticketCode }}</h3>
+        <button type="button" routerLink="/tickets" pButton pRipple class="p-button-secondary mr-3"
+          icon="pi pi-angle-double-left">. Back to previous menu</button>
+      </div>
+      <div class="container">
+        <!-- //Info Forum -->
+        <p-panel header="Ticket Detail" [toggleable]="true" class="mt-3">
+          <ul class="list-group list-group-flush">
+            <div class="grid p-3">
+              <div class="col-12 md:col-3 mb-md-3">
+                <label for="exampleFormControlInput1" class="form-label">Ticket Title</label>
+              </div>
+              <div class="col-12 md:col-9 mb-md-3">
+                <label for="exampleFormControlInput1" class="form-label">{{ ticketDataResDto?.title }}</label>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="grid p-3">
+                <div class="col-12 md:col-3 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">Prioritas Tiket</label>
+                </div>
+                <div class="col-12 md:col-9 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">{{ ticketDataResDto?.priority}}</label>
+                </div>
+              </div>
+              <div class="grid p-3">
+                <div class="col-12 md:col-3 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">Status Tiket</label>
+                </div>
+                <div class="col-12 md:col-9 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">{{ ticketDataResDto?.status}}</label>
+                </div>
+              </div>
+              <div class="grid p-3">
+                <div class="col-12 md:col-3 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">Body Tiket</label>
+                </div>
+                <div class="col-12 md:col-9 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">{{ ticketDataResDto?.body}}
+                  </label>
+                </div>
+              </div>
+              <div class="grid p-3">
+                <div class="col-12 md:col-3 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">Nama Customer</label>
+                </div>
+                <div class="col-12 md:col-9 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">{{ ticketDataResDto?.customerName}}</label>
+                </div>
+              </div>
+              <div class="grid p-3">
+                <div class="col-12 md:col-3 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">Lampiran</label>
+                </div>
+                <div class="col-12 md:col-9 mb-md-3">
+                  <div *ngFor="let attach of attachDataResDto;let i =index" class="col">
+                    <label for="exampleFormControlInput1" class="form-label">
+                      <a href="{{ attach.attachmentId|url }}">
+                        File Terlampir{{ i+1 }}
+                      </a>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ul>
+        </p-panel>
+
+
+        <!-- // Form Chat -->
+        <p-fieldset class="p-3">
+          <ng-template pTemplate="header">
+            <div class="flex align-items-center text-primary">
+              <span class="pi pi-fw pi-comment mr-2"></span>
+              <span class="font-bold text-lg">Add Comment</span>
+            </div>
+          </ng-template>
+          <div class="card">
+            <form class="grid" [formGroup]="commentReqDto" (ngSubmit)="insertComment()">
+              <div class="col-12 md:col-2 mt-3 ">
+                <label for="comment" class="form-label">Comment</label>
+              </div>
+              <div class="col-12 md:col-10 mt-3">
+                <textarea pInputText="comment" id="comment" class="form-control col-12" required
+                  formControlName="message"></textarea>
+              </div>
+              <div class="col-12 mb-3 grid justify-content-end">
+                <label for="formFile" class="col-3 form-label">Add File</label>
+                <p-fileUpload chooseIcon="pi pi-paperclip" name="fileList[]" [multiple]="true"
+                  [showUploadButton]="false" (onSelect)="fileUpload($event)">
+                </p-fileUpload>
+              </div>
+              <div class="grid justify-content-end col-12">
+                <button type="button" routerLink="/tickets" pButton pRipple class="p-button-secondary mr-3"
+                  icon="pi pi-angle-double-left">. Back to previous menu</button>
+                <button type="submit" pButton pRipple class="p-button-primary" icon="pi pi-send mr-3">Add comment
+                </button>
+              </div>
+            </form>
+          </div>
+        </p-fieldset>
+
+        <!-- View Forum -->
+        <p-panel header="Chat Detail" [toggleable]="true" class="mt-3">
+          <div class="container mt-3">
+            <div class="grid flex justify-content-center align-items-center">
+              <div class="col-md-12">
+                <div class="card" id="chat1" style="border-radius: 1rem;">
+                  <div
+                    class="card-header bg-primary-subtle flex justify-content-between align-items-centertext-dark border-bottom-0"
+                    style="border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+                    <i class="bi bi-chevron-left"></i>
+                    <p class="mb-0 fw-semibold">Forum {{ ticketDataResDto?.title }}</p>
+                    <i class="bi bi-x-lg"></i>
+                  </div>
+                  <div class="card-body">
+                    <p-scrollPanel [style]="{ width: '700px', height: '700px' }">
+                      <div *ngFor="let comment of commentDataResDto" class="comment-container">
+                        <!-- ------------------------------ -->
+                        <ng-container *ngIf="comment.roleName === 'Developer'; else customerComment">
+                          <div class="flex justify-content-between">
+                            <p class="small mb-1">{{ comment.fullName }}</p>
+                            <p class="small mb-1 text-muted">{{ formatDate(comment.createdAt) }}</p>
+                          </div>
+                          <div class="flex p-flex-row justify-content-start mb-3">
+                            <img [src]="comment.photo |url" alt="{{ comment.fullName }}"
+                              style="width: 3.5rem; height: 100%;" class="mr-3">
+                            <div class="p-3 ms-3" style="border-radius: 1rem; background-color:aliceblue;">
+                              <p class="small mb-0"> {{ comment.message }}</p>
+                            </div>
+                          </div>
+                          <div *ngIf="comment.attachments.length > 0">
+                            <div class="flex p-flex-row justify-content-start mb-3">
+                              <img [src]="comment.photo |url" alt="{{ comment.fullName }}"
+                                style="width: 3.5rem; height: 100%;" class="mr-3">
+                              <div class="p-3 ms-3" style="border-radius: 1rem; background-color:aliceblue;">
+                                <p>File Terlampir:</p>
+                                <ul>
+                                  <li class="small" *ngFor="let attachment of comment.attachments;let i =index">
+                                    <a href="{{ attachment.attachmentId|url }}">
+                                      File Terlampir{{ i+1 }}
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- -------------------------------------------- -->
+                        </ng-container>
+
+                        <ng-template #customerComment>
+                          <div class="flex justify-content-between">
+                            <p class="small mb-1 text-muted">{{ formatDate(comment.createdAt) }}</p>
+                            <p class="small mb-1">{{ comment.fullName }}</p>
+                          </div>
+                          <div class="flex p-flex-row justify-content-end mb-3">
+                            <div class="p-3 ms-3" style="border-radius: 1rem; background-color:skyblue;">
+                              <p class="small mb-0"> {{ comment.message }}</p>
+                            </div>
+                            <img [src]="comment.photo |url" alt="{{ comment.fullName }}"
+                              style="width: 3.5rem; height: 100%;" class="ml-3">
+                          </div>
+                          <div *ngIf="comment.attachments.length > 0">
+                            <div class="flex justify-content-between">
+                              <p class="small mb-1 text-muted">{{ formatDate(comment.createdAt) }}</p>
+                              <p class="small mb-1">{{ comment.fullName }}</p>
+                            </div>
+                            <div class="flex p-flex-row justify-content-end mb-3">
+                              <div class="p-3 ms-3" style="border-radius: 1rem; background-color:skyblue;">
+                                <p>File Terlampir:</p>
+                                <ul>
+                                  <li class="small" *ngFor="let attachment of comment.attachments;let i=index">
+                                    <a href="{{ attachment.attachmentId|url }}">
+                                      File Terlampir{{ i+1 }}
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                              <img [src]="comment.photo |url" alt="{{ comment.fullName }}"
+                                style="width: 3.5rem; height: 100%;" class="ml-3">
+                            </div>
+                          </div>
+                        </ng-template>
+                      </div>
+                    </p-scrollPanel>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-panel>
+      </div>
+    </div>
+  </div>
+</div>

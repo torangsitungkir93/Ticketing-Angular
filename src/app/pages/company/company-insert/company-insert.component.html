@@ -1,0 +1,50 @@
+<form [formGroup]="companyInsertReqDto" (ngSubmit)="insert()">
+  <pre>{{ companyInsertReqDto.value|json }}</pre>
+  <div class="container">
+    <div class="card-container w-screen flex flex-wrap justify-content-center align-items-center"
+      style="min-height: 700px">
+      <div class="grid shadow-8 m-4 surface-card border-round-sm border-400 p-3 md:col-8 text">
+        <div class="flex text-center justify-content-center col-12">
+          <h2 class="text-center">Tambah Data Company</h2>
+        </div>
+
+        <div class="col-12 md:col-3">
+          <label for="companyCode" class="form-label">Company Code<span style="color: red;">*</span></label>
+        </div>
+        <div class="col-12 md:col-9">
+          <input pInputText type="text" class="form-control col-12" id="companyCode" aria-describedby="companyCodeHelp"
+            required formControlName="companyCode">
+        </div>
+        <div class="col-12 md:col-9 col-offset-3">
+          <small id="companyCodeHelp" class="form-text">Company code should be 5 characters long.</small>
+        </div>
+        <div class="col-12 md:col-3">
+          <label for="companyName" class="form-label">Company Name<span style="color: red;">*</span></label>
+        </div>
+        <div class="col-12 md:col-9">
+          <input pInputText type="text" class="form-control col-12" id="companyName" aria-describedby="companyNameHelp"
+            required formControlName="companyName">
+        </div>
+        <div class="col-12 md:col-3">
+          <label for="companyAddress" class="form-label">Company Address<span style="color: red;">*</span></label>
+        </div>
+        <div class="col-12 md:col-9">
+          <textarea pInputText class="form-control col-12" id="companyAddress" rows="3" required
+              formControlName="companyAddress"></textarea>
+        </div>
+
+          <label for="formFile" class="col-12 md:col-3 form-label">Company Photo<span
+              style="color: red;">*</span></label>
+          <p-fileUpload mode="basic" class="col-12 md:col-9" chooseLabel="Upload" accept="image/*"
+            (onSelect)="fileUpload($event)">
+          </p-fileUpload>
+          <div class="flex flex-wrap justify-content-end mt-2 col-12">
+            <button type="button" routerLink="/companies" pButton pRipple class="p-button-secondary mr-3"
+              icon="pi pi-angle-double-left">. Back to previous menu</button>
+            <button type="submit" pButton pRipple class="p-button-primary"
+              [disabled]="companyInsertReqDto.invalid">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</form>

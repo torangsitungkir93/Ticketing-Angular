@@ -1,0 +1,71 @@
+
+
+<div class="container grid justify-content-center p-3">
+  <div class=" grid justify-content-center col-12">
+    <h3 class="text-center">Table List PIC-Customer</h3>
+  </div>
+  <div class="card col-9">
+    <div class="grid justify-content-end mb-3">
+      <button type="button" (click)="detail()" pButton pRipple class="p-button-primary">
+        Add Data
+      </button>
+    </div>
+    <p-table [value]="picCustomerResDto" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Nama PIC</th>
+          <th scope="col">Nama Customer</th>
+          <th scope="col">Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-pc let-i="rowIndex">
+        <tr>
+          <th scope="row">{{ pc.id }}</th>
+          <td>{{ pc.picName }}</td>
+          <td>{{ pc.custName }}</td>
+          <td>
+            <button type="button" pButton pRipple class="p-button-danger">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<!-- Modal -->
+<p-dialog header="Assign PIC-Customer" [(visible)]="visible" [style]="{ width: '50vw' }">
+  <pre>{{ assignPic.value|json }}</pre>
+  <button pButton pRipple class="p-button-primary m-3" (click)="onAdd()">
+    Add
+  </button>
+  <form [formGroup]="assignPicCust" (ngSubmit)="insert()">
+    <div class="modal-body" *ngFor="let pa of assignPic.controls; let i=index" formArrayName="data">
+      <div class="grid" [formGroupName]="i">
+        <div class="form-group grid flex">
+          <div class="form-floating col-12">
+            <label for="floatingSelect col-12 md:col-3">Select PIC</label>
+            <p-dropdown formControlName="picId" class="col-12 md:col-9 m-3"  [options]="pic" optionLabel="profileName" placeholder="select"
+              optionValue="id"></p-dropdown>
+          </div>
+        </div>
+        <div class="form-group grid flex">
+          <div class="form-floating col-12">
+            <label for="floatingSelect col-12 md:col-3">Select Customer</label>
+            <p-dropdown formControlName="customerId" class="col-12 md:col-3 m-3" [options]="customer" optionLabel="profileName" placeholder="select"
+              optionValue="id"></p-dropdown>
+          </div>
+        </div>
+        <button pButton pRipple class="p-button-danger" (click)="onRemove(i)">
+          delete
+        </button>
+      </div>
+    </div>
+    <div class="flex py-2 justify-content-end">
+      <p-button icon="pi pi-check" type="submit" label="Assign" styleClass="p-button-primary justify-content-end">
+      </p-button>
+    </div>
+  </form>
+</p-dialog>

@@ -1,0 +1,205 @@
+
+
+
+
+
+
+<div class="container mt-5">
+  <pre>{{ ticketDataResDto|json}}</pre>
+  <div class="card">
+    <div class="card-header d-flex justify-content-between">
+      <h5>Ticket {{ ticketDataResDto.title }} #{{ ticketDataResDto.ticketCode }}</h5>
+      <a routerLink="/tickets"> <button type="button" class="btn btn-secondary me-2">
+          <i class="bi bi-chevron-double-left"></i> Back to previous menu
+        </button></a>
+    </div>
+
+    <div class="card-body">
+
+      <div class="container">
+        <div class="col-12">
+          <div class="card mt-3">
+            <div class="card-header">
+              <p class="fw-semibold">
+                Ticket Detail Developer
+              </p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <div class="row p-3">
+                <div class="col-12 col-md-3 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">Ticket Title</label>
+                </div>
+                <div class="col-12 col-md-9 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">{{ ticketDataResDto.title }}</label>
+                </div>
+              </div>
+            </ul>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12 col-md-3 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">Prioritas Tiket</label>
+                </div>
+                <div class="col-12 col-md-9 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">{{ ticketDataResDto.priority}}</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-3 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">Status Tiket</label>
+                </div>
+                <div class="col-12 col-md-9 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">{{ ticketDataResDto.status}}</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-3 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">Body Tiket</label>
+                </div>
+                <div class="col-12 col-md-9 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">{{ ticketDataResDto.body}}
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-3 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">Nama Customer</label>
+                </div>
+                <div class="col-12 col-md-9 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">{{ ticketDataResDto.customerName}}</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-3 mb-md-3">
+                  <label for="exampleFormControlInput1" class="form-label">Lampiran</label>
+                </div>
+                <div class="col-12 col-md-9 mb-md-3">
+                  <div class="col">
+                    <label for="exampleFormControlInput1" class="form-label">
+                      <a href="">
+                        contoh1.mp4
+                      </a>
+                    </label>
+                  </div>
+                  <div class="col">
+                    <label for="exampleFormControlInput1" class="form-label">
+                      <a href="">
+                        contoh2.jpg
+                      </a>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container mt-3">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <p class="fw-semibold">
+                  Tambah Komentar
+                </p>
+              </div>
+              <div class="card-body">
+                <form class="row">
+                  <div class="col-md-2 mt-3 ">
+                    <label for="comment" class="form-label">Comment<span class="text-danger">*</span></label>
+                  </div>
+                  <div class="col-md-10 mt-3">
+                    <textarea name="comment" id="comment" class="form-control" required></textarea>
+                  </div>
+                  <div class="col-md-12 mt-3 d-flex justify-content-end">
+                    <button class="btn btn-primary" type="submit" id="insertComment">Submit</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container mt-3">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col-md-12">
+            <div class="card" id="chat1" style="border-radius: 1rem;">
+              <div
+                class="card-header bg-primary-subtle d-flex justify-content-between align-items-centertext-dark border-bottom-0"
+                style="border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+                <i class="bi bi-chevron-left"></i>
+                <p class="mb-0 fw-semibold">Forum {{ ticketDataResDto.title }}</p>
+                <i class="bi bi-x-lg"></i>
+              </div>
+              <div class="card-body">
+                <div *ngFor="let comment of commentDataResDto" class="comment-container">
+                  <!-- ------------------------------ -->
+                  <ng-container *ngIf="comment.roleName === 'Developer'; else customerComment">
+                    <div class="d-flex justify-content-between">
+                      <p class="small mb-1">{{ comment.fullName }}</p>
+                      <p class="small mb-1 text-muted">{{ formatDate(comment.createdAt) }}</p>
+                    </div>
+                    <div class="d-flex flex-row justify-content-start mb-3">
+                      <img src="http://localhost:8080/files/{{ comment.photo }}" alt="{{ comment.fullName }}"
+                        style="width: 3.5rem; height: 100%;">
+                      <div class="p-3 ms-3" style="border-radius: 1rem; background-color:aliceblue;">
+                        <p class="small mb-0"> {{ comment.message }}</p>
+                      </div>
+                    </div>
+                    <div *ngIf="comment.attachments.length > 0">
+                      <div class="d-flex flex-row justify-content-start mb-3">
+                        <img src="http://localhost:8080/files/{{ comment.photo }}" alt="{{ comment.fullName }}"
+                        style="width: 3.5rem; height: 100%;">
+                        <div class="p-3 ms-3" style="border-radius: 1rem; background-color:aliceblue;">
+                          <p>File Terlampir:</p>
+                          <ul>
+                            <li class="small" *ngFor="let attachment of comment.attachments">
+                              {{ attachment.file }} ({{ attachment.ext }})
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- -------------------------------------------- -->
+                  </ng-container>
+
+                  <ng-template #customerComment>
+                    <div class="d-flex justify-content-between">
+                      <p class="small mb-1 text-muted">{{ formatDate(comment.createdAt) }}</p>
+                      <p class="small mb-1">{{ comment.fullName }}</p>
+                    </div>
+                    <div class="d-flex flex-row justify-content-end mb-3">
+                      <div class="p-3 ms-3" style="border-radius: 1rem; background-color:skyblue;">
+                        <p class="small mb-0"> {{ comment.message }}</p>
+                      </div>
+                      <img src="http://localhost:8080/files/{{ comment.photo }}" alt="{{ comment.fullName }}"
+                        style="width: 3.5rem; height: 100%;">
+                    </div>
+                    <div *ngIf="comment.attachments.length > 0">
+                      <div class="d-flex justify-content-between">
+                        <p class="small mb-1 text-muted">{{ formatDate(comment.createdAt) }}</p>
+                        <p class="small mb-1">{{ comment.fullName }}</p>
+                      </div>
+                      <div class="d-flex flex-row justify-content-end mb-3">
+                        <div class="p-3 ms-3" style="border-radius: 1rem; background-color:skyblue;">
+                          <p>File Terlampir:</p>
+                          <ul>
+                            <li class="small" *ngFor="let attachment of comment.attachments">
+                              {{ attachment.file }} ({{ attachment.ext }})
+                            </li>
+                          </ul>
+                        </div>
+                        <img src="http://localhost:8080/files/{{ comment.photo }}" alt="{{ comment.fullName }}"
+                        style="width: 3.5rem; height: 100%;" class="">
+                      </div>
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
