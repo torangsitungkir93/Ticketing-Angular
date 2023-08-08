@@ -17,6 +17,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 
+
 const routes : Routes = [
     {
         path : '',
@@ -57,7 +58,7 @@ const routes : Routes = [
         FileUploadModule,
         InputNumberModule,
         ConfirmDialogModule,
-        DialogModule
+        DialogModule,
     ],
     exports : [
         RouterModule,
